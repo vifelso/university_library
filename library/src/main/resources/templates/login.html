@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorator="layout"
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+<head>
+<title>Sign in to University Library</title>
+</head>
+<body>
+	<div layout:fragment="content">
+		<div class="row">
+			<div class="col-md-3 col-md-offset-4">
+				<form th:action="@{/login}" method="post" class="form-signin">
+					<h2>Please sign in</h2>
+					<div th:if="${param.error}" class="alert alert-danger">Invalid
+						username and password.</div>
+					<div th:if="${param.logout}" class="alert alert-success">You
+						have been logged out.</div>
+					<div>
+						<label> User Name : <input type="text" name="username"
+							class="form-control" />
+						</label>
+					</div>
+					<div>
+						<label> Password: <input type="password" name="password"
+							class="form-control" />
+						</label>
+					</div>
+					<div>
+						<input class="btn btn-lg btn-primary btn-block" type="submit"
+							value="Sign In" />
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+</body>
+</html>

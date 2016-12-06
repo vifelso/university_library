@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorator="layout">
+<body>
+	<div layout:fragment="content">
+		<div class="jumbotron" style="margin-top: 20px;">
+			<h1>University Library</h1>
+			<p class="lead">Search for books and place your orders!</p>
+			<div sec:authorize="isAnonymous()">
+				<p>
+					<a class="btn btn-lg btn-success" href="/demands" role="button">Login</a>
+					<a class="btn btn-lg btn-primary" href="/register" role="button">Sign Up</a>
+				</p>
+			</div>
+			<div sec:authorize="isAuthenticated()">
+				<p>
+					You are logged in as: <span sec:authentication="name"></span>
+				</p>
+				<p>
+					<a class="btn btn-lg btn-danger" href="/logout" role="button">Logout</a>
+				</p>
+			</div>
+		</div>
+	</div>
+</body>
+</html>

@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorator="layout">
+<body>
+	<div layout:fragment="content">
+		<div class="row" style="margin-bottom: 30px;">
+			<div class="col-sm-12">
+				<div class="panel panel-success">
+					<div class="panel-heading">
+						<h3 class="panel-title">My Demands</h3>
+					</div>
+					<div class="panel-body">
+						<table id="book-orders" class="table table-bordered">
+							<thead>
+								<tr class="btn-success">
+									<th>№</th>
+									<th>Actions</th>
+									<th>Title</th>
+									<th>Publisher</th>
+									<th>Description</th>
+									<th>Authors</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr th:if="${#lists.isEmpty(userBooks)}" class="btn-warning">
+									<td colspan="6" align="center">No demands for books</td>
+								</tr>
+								<tr th:each="book,iteratorStat : ${userBooks}">
+									<td th:text="${iteratorStat.count}"></td>
+									<td>
+										<button	th:onclick="'javascript:cancelOrder(\'' + ${book.id} + '\');'"
+											type="button" class="btn btn-primary btn-sm">Cancel order</button> 
+									</td>
+									<td th:text="${book.title}"></td>
+									<td th:text="${book.publisher}"></td>
+									<td th:text="${book.description}"></td>
+									<td><p th:each="author : ${book.authors}" th:text="${author}"></p></td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+</html>

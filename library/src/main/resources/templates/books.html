@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorator="layout">
+<body>
+	<div layout:fragment="content">
+		<div class="row" style="margin-bottom: 30px;">
+			<div class="col-sm-12">
+				<div class="panel panel-success">
+					<div class="panel-heading">
+						<h3 class="panel-title">Books</h3>
+					</div>
+					<div class="panel-body">
+						<table class="table table-bordered">
+							<thead>
+								<tr class="btn-success">
+									<th>Actions</th>
+									<th>Title</th>
+									<th>Publisher</th>
+									<th>Description</th>
+									<th>Authors</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr th:if="${#lists.isEmpty(searchBooks)}" class="btn-warning">
+									<td colspan="5" align="center">Books not found for your request: <span
+										th:text="${searchString}"></span></td>
+								</tr>
+								<tr th:each="book : ${searchBooks}">
+									<td th:switch="${#lists.contains(userBooks, book.id)}"
+										th:id="${book.id}">
+										<button th:case="${false}"
+											th:onclick="'javascript:makeOrder(\'' + ${book.id} + '\');'"
+											type="button" class="btn btn-primary btn-sm">Order</button> <span
+										th:case="${true}">Booked</span>
+									</td>
+									<td th:text="${book.title}"></td>
+									<td th:text="${book.publisher}"></td>
+									<td th:text="${book.description}"></td>
+									<td><p th:each="author : ${book.authors}"
+											th:text="${author}"></p></td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+</html>
